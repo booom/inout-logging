@@ -1,6 +1,6 @@
 package example;
 
-import aoplogging.InoutLogger;
+import aoplogging.InoutLoggerInterceptor;
 import aoplogging.InoutLogging;
 import com.google.inject.*;
 import com.google.inject.matcher.Matchers;
@@ -16,7 +16,7 @@ public class App
         Injector inj = Guice.createInjector(new Module(){
             @Override
             public void configure(Binder binder){
-                binder.bindInterceptor(Matchers.annotatedWith(InoutLogging.class), Matchers.any(), new InoutLogger());
+                binder.bindInterceptor(Matchers.annotatedWith(InoutLogging.class), Matchers.any(), InoutLoggerInterceptor.getInstance());
             }
         });
 

@@ -1,7 +1,6 @@
 package aoplogging;
 
 import com.alibaba.fastjson.JSON;
-import com.google.inject.Singleton;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
@@ -11,17 +10,26 @@ import org.slf4j.LoggerFactory;
  * User: Vanwin
  * Date: 14-10-20
  */
-public class InoutLogger implements MethodInterceptor {
-    private static final Logger logger = LoggerFactory.getLogger(InoutLogger.class);
+public class InoutLoggerInterceptor implements MethodInterceptor {
+    private InoutLoggerInterceptor(){
+    }
 
-    private static boolean isPrint = true;
+    private static InoutLoggerInterceptor instance = new InoutLoggerInterceptor();
+
+    public static InoutLoggerInterceptor getInstance(){
+        return instance;
+    }
+
+    private final Logger logger = LoggerFactory.getLogger(InoutLoggerInterceptor.class);
+
+    private boolean isPrint = true;
 
     public boolean getIsPrint() {
-        return InoutLogger.isPrint;
+        return isPrint;
     }
 
     public void setIsPrint(boolean isPrint) {
-        InoutLogger.isPrint = isPrint;
+        isPrint = isPrint;
     }
 
 
